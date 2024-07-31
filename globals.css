@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --main-green: #2AA31F;
+    --main-yellow: #EFB047;
+    --main-red: #F53B30;
+    --dark-gray-1: #0D0F11;
+    --dark-gray-2: #191D23;
+    --dark-gray-3: #262C36;
+    --dark-gray-4: #334E68;
+    --dark-gray-5: #576776;
+}
+
+
+/* Estilo para remover o preenchimento automático do navegador */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #262C36 inset !important;
+    /* Altere a cor de fundo aqui se necessário */
+    -webkit-text-fill-color: #fff !important;
+    /* Altere a cor do texto aqui se necessário */
+}
+
+/* Estilo geral da barra de rolagem */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+/* Track da barra de rolagem */
+::-webkit-scrollbar-track {
+    background: none;
+    border-radius: 10px;
+}
+
+/* Thumb da barra de rolagem */
+::-webkit-scrollbar-thumb {
+    background: var(--dark-gray-5); 
+    border-radius: 10px;
+}
+
+/* Thumb da barra de rolagem quando está sendo ativa (drag) */
+::-webkit-scrollbar-thumb:active {
+    background: #555;
+}
+
+/* Thumb da barra de rolagem quando é hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-gray-4);
+}
+
+body {
+    color: white;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+
+th {
+    background-color: #262C36;
+}
