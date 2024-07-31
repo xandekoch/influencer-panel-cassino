@@ -21,6 +21,7 @@ const Login = () => {
     const onSubmit = async (data) => {
         setIsLoading(true);
         try {
+            console.log(data);
             const session = await login(data);
             authenticate(session);
         } catch (error) {

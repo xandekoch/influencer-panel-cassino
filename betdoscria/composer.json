@@ -1,0 +1,14 @@
+{
+  "autoload": {
+    "psr-4": {
+      "api\\": "api"
+    },
+    "files": [
+      "config.php"
+    ]
+  },
+  "require": {
+    "vlucas/phpdotenv": "^5.4",
+    "firebase/php-jwt": "^6.10"
+  }
+}

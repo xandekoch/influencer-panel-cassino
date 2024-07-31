@@ -7,8 +7,7 @@ import InfluencersList from './components/InfluencersList';
 import InfluencerInfoAdmin from './components/InfluencerInfoAdmin';
 
 const App = () => {
-  // const { isAuthenticated } = useAuth();
-  const isAuthenticated = true;
+  const { isAuthenticated } = useAuth();
 
   return (
     <main className='App font-sans'>

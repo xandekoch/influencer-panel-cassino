@@ -9,30 +9,35 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState('');
 
   useEffect(() => {
-    const session = JSON.parse(localStorage.getItem('session') || null);
-    if (isValidSession(session)) {
-      authenticate(session);
+    const token = JSON.parse(localStorage.getItem('token') || null)
+    console.log("fodase", token);
+    if (isValidSession(token)) {
+      authenticate(token);
     } else {
       logout();
     }
   }, []);
 
-  const authenticate = (session) => {
-    if (isValidSession(session)) {
+  const authenticate = (token) => {
+    if (isValidSession(token)) {
       setIsAuthenticated(true);
-      setUser(session.user);
-      setToken(session.token);
-      localStorage.setItem('session', JSON.stringify(session));
+      setToken(token);
+      const decodedToken = decodeToken(token);
+      setUser({userId: decodedToken.userId, email: decodedToken.iss, isAdmin: decodedToken.isAdmin});
+      localStorage.setItem('session', JSON.stringify(decodedToken));
+      localStorage.setItem('token', JSON.stringify(token));
     } else {
       logout();
     }
   };
+
 
   const logout = () => {
     setIsAuthenticated(false);
     setUser({});
     setToken('');
     localStorage.removeItem('session');
+    localStorage.removeItem('token');
   };
 
   return (
@@ -43,11 +48,12 @@ export const AuthProvider = ({ children }) => {
 };
 
 
-export const isValidSession = (session) => {
+export const isValidSession = (token) => {
   try {
-    if (!session) return false;
+    if (!token) return false;
 
-    const decodedToken = decodeToken(session.token);
+    const decodedToken = decodeToken(token);
+    console.log(decodedToken);
     const exp = decodedToken.exp;
 
     if (decodedToken) {

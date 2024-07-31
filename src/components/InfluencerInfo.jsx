@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { backendConfig } from '../api/config';
 import axios from 'axios';
 import { useAuth } from '../context/AuthProvider';
+import { getInfluencerInfo } from '../api/authApi';
 
 const InfluencerInfoAdmin = () => {
+    console.log('InfluencerInfoAdmin');
     const [withdraws, setWithdraws] = useState([]);
+    const {user, token} = useAuth(); 
     const influencerId = 50;
-    const [user, setUser] = useState({
+    const [userData, setUserData] = useState({
         depositors: 0,
         total: 0,
         average: 0,
@@ -15,7 +18,10 @@ const InfluencerInfoAdmin = () => {
     const { logout } = useAuth();
 
     useEffect(() => {
+        console.log('fds0')
         const fetchUser = async () => {
+            const userDataa = await getInfluencerInfo(user.userId, token);
+            console.log(userDataa);
             const data = {
                 depositors: 10,
                 total: 100,
@@ -23,7 +29,7 @@ const InfluencerInfoAdmin = () => {
                 fakeTotal: 7,
                 fakeAverage: 5
             }
-            setUser(data);
+            setUserData(data);
         };
         fetchUser();
     }, []);
@@ -53,15 +59,15 @@ const InfluencerInfoAdmin = () => {
             <div className='flex flex-col items-center justify-center gap-6 pb-6 pt-6'>
                 <div className='w-full bg-gray-900 p-6 rounded-xl grid gap-y-2'>
                     <span className='text-sm font-medium text-gray-400'>Depositantes</span>
-                    <div className='text-3xl font-bold'>{user.depositors}</div>
+                    <div className='text-3xl font-bold'>{userData.depositors}</div>
                 </div>
                 <div className='w-full bg-gray-900 p-6 rounded-xl grid gap-y-2'>
                     <span className='text-sm font-medium text-gray-400'>Total Depositado</span>
-                    <div className='text-3xl font-bold'>{user.total}</div>
+                    <div className='text-3xl font-bold'>{userData.total}</div>
                 </div>
                 <div className='w-full bg-gray-900 p-6 rounded-xl grid gap-y-2'>
                     <span className='text-sm font-medium text-gray-400'>Depósito Médio</span>
-                    <div className='text-3xl font-bold'>{user.average}</div>
+                    <div className='text-3xl font-bold'>{userData.average}</div>
                 </div>
             </div>
             <h2 className='text-2xl font-bold text-white mb-4'>Histório de Pagamentos</h2>
